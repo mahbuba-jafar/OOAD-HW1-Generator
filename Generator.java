@@ -1,25 +1,26 @@
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 public class Generator {
 
 private Random random = new Random();
 
-public ArrayList<Double> populate(int n, int randomNumGen){
+public ArrayList<Double> populate(int n, int randNumGen){
  ArrayList<Double> m = new ArrayList<>();
 
-    if(randomNumGen == 1){
+    if(randNumGen == 1){
         for (int i = 0; i < n; i++) {
             m.add(random.nextDouble());
         }
     }
-    if(randomNumGen == 2){
+    if(randNumGen == 2){
         for (int i = 0; i < n; i++) {
             m.add(Math.random());
         }
     }
-    if(randomNumGen == 3){
+    if(randNumGen == 3){
         for (int i = 0; i < n; i++) {
             m.add(ThreadLocalRandom.current().nextDouble());
         }
@@ -47,13 +48,36 @@ public static double stddev(ArrayList<Double> m) {
     return Math.sqrt(sum / (m.size() - 1));
 }
 
+public ArrayList<Double> statistics(ArrayList<Double> randomValues){
+
+    ArrayList<Double> results = new ArrayList<>();
+
+    int n = randomValues.size();
+
+    double meanValue = mean(randomValues);
+    double stddevValue = stddev(randomValues);
+    double minValue = Collections.min(randomValues);
+    double maxValue =Collections.max(randomValues);
+    
+    results.add((double)n);
+    results.add(meanValue);
+    results.add(stddevValue);
+    results.add(minValue);
+    results.add(maxValue);
+
+    return results;
+
+
+}
+
     public static void main(String[] args) {
         Generator g = new Generator();
         int n = 10;
         ArrayList<Double> m = g.populate(n, 1);
         
+        ArrayList<Double> t = g.statistics(m);
+        // System.out.println(statistic.t);
         System.out.println(m);
-        System.out.println(mean(m));
-        System.out.println(stddev(m));
+        System.out.println(t);
     }
 }
