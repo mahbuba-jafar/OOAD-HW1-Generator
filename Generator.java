@@ -2,17 +2,61 @@
 import java.util.ArrayList;
 import java.util.Random;
 
+
 public class Generator {
+
+
+// static void randomNms(int n, int randomNumGen){
+
+
+// }
+
+
+public static double mean(ArrayList<Double> m) {
+    double sum = 0.0;
+    for (int i = 0; i < m.size(); i++) {
+        sum += m.get(i);
+    }
+    return sum / m.size();
+}
+
+public static double stddev(ArrayList<Double> m) {
+    double avg = mean(m);
+    double sum = 0.0;
+
+    for (int i = 0; i < m.size(); i++) {
+        sum += Math.pow(m.get(i) - avg, 2);
+    }
+
+    return Math.sqrt(sum / (m.size() - 1));
+}
+
+// public static double mean(double[] m) {
+//     double sum = 0;
+//     for (int i = 0; i < m.length; i++) {
+//         sum += m[i];
+//     }
+//     return sum / m.length;
+// }
+
+// public static double stddev() {
+// for(int i = 0; i < array.length; i++){
+//    array[i] = Math.pow((array[i]-mean()),2)
+// }
+// }
+
     public static void main(String[] args) {
         int n = 10;
         Random random = new Random();
-        ArrayList<Float> m = new ArrayList<>();
+        ArrayList<Double> m = new ArrayList<>();
         for (int i = 0; i < n; i++) {
-            m.add(random.nextFloat());
+            m.add(random.nextDouble());
                     // System.out.println(random.nextFloat());
 
         }
         // ArrayList<Float> m = new ArrayList<>();
         System.out.println(m);
+        System.out.println(mean(m));
+        System.out.println(stddev(m));
     }
 }
