@@ -1,6 +1,7 @@
 
 import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 public class Generator {
 
 private Random random = new Random();
@@ -8,9 +9,19 @@ private Random random = new Random();
 public ArrayList<Double> populate(int n, int randomNumGen){
  ArrayList<Double> m = new ArrayList<>();
 
-if(randomNumGen == 1){
+    if(randomNumGen == 1){
         for (int i = 0; i < n; i++) {
             m.add(random.nextDouble());
+        }
+    }
+    if(randomNumGen == 2){
+        for (int i = 0; i < n; i++) {
+            m.add(Math.random());
+        }
+    }
+    if(randomNumGen == 3){
+        for (int i = 0; i < n; i++) {
+            m.add(ThreadLocalRandom.current().nextDouble());
         }
     }
     return m;
