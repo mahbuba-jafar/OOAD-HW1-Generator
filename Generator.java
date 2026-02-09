@@ -53,6 +53,9 @@ public ArrayList<Double> populate(int n, int randNumGen){
             m.add(ThreadLocalRandom.current().nextDouble());
         }
     }
+    else {
+    throw new IllegalArgumentException("randNumGen must be 1, 2, or 3");
+         }
     return m;
 }
 
