@@ -55,7 +55,7 @@ public ArrayList<Double> statistics(ArrayList<Double> randomValues){
     int n = randomValues.size();
 
     double meanValue = mean(randomValues);
-    double stddevValue = stddev(randomValues);
+    double stddevValue = (n < 2) ? 0.0 : stddev(randomValues);
     double minValue = Collections.min(randomValues);
     double maxValue =Collections.max(randomValues);
     
@@ -69,15 +69,46 @@ public ArrayList<Double> statistics(ArrayList<Double> randomValues){
 
 
 }
+void display(ArrayList<Double> results, boolean headerOn){
+    if (headerOn) {
+        System.out.printf(
+            "%-8s %-10s %-10s %-10s %-10s%n",
+            "n", "mean", "stddev", "min", "max"
+        );
+    }
+
+    System.out.printf(
+        "%-8.0f %-10.4f %-10.4f %-10.4f %-10.4f%n",
+        results.get(0),
+        results.get(1), 
+        results.get(2),
+        results.get(3),
+        results.get(4)
+    );
+}
+void execute(){
+    int[] n = {10,100,150};
+
+boolean headerOn = true;
+
+    for (int i = 0; i < n.length; i++) {
+        for (int j = 1; j <=3 ; j++) {
+            ArrayList<Double> values = populate(n[i], j);
+            ArrayList<Double> stats = statistics(values);
+            display(stats, headerOn);
+            headerOn = false;
+        }
+    }
+
+}
 
     public static void main(String[] args) {
         Generator g = new Generator();
-        int n = 10;
-        ArrayList<Double> m = g.populate(n, 1);
-        
-        ArrayList<Double> t = g.statistics(m);
-        // System.out.println(statistic.t);
-        System.out.println(m);
-        System.out.println(t);
+        // int n = 10;
+        // ArrayList<Double> m = g.populate(n, 1);
+        // ArrayList<Double> t = g.statistics(m);
+        // g.display(t, true);
+        g.execute();
+
     }
 }
