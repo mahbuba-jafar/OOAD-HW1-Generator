@@ -10,22 +10,29 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /*
- * Class definition:
+ * Class definition (explicit):
  * The Generator class is responsible for generating random numbers
  * using different Java random number generators, computing descriptive
  * statistics, and displaying the results.
  */
 
 public class Generator {
+// Accessibility examples in this file:
+// - private attribute: random
+// - public methods: populate(), statistics()
+// - static methods: mean(), stddev()
 
-// Class attribute (private accessibility)
+
+// Class attribute(explicit): This class has a class attribute with PRIVATE accessibilit
 private Random random = new Random();
 
 /**
- * Creates and returns n random doubles in [0,1) using the selected generator.
+ * Method definition(explicit): This method creates and returns n random doubles in [0,1) 
+ * using the selected generator.
  * @param n number of values to generate
  * @param randNumGen 1=Random, 2=Math.random, 3=ThreadLocalRandom
  * @return ArrayList of generated values
+ * Accessibility: public
  */
 
 public ArrayList<Double> populate(int n, int randNumGen){
@@ -49,7 +56,8 @@ public ArrayList<Double> populate(int n, int randNumGen){
     return m;
 }
 
-/**
+/** 
+     * Method definition (explicit):
      * Calculates the mean (average) of the given list of values.
      * @param m list of double values
      * @return mean of the values
@@ -63,6 +71,7 @@ public static double mean(ArrayList<Double> m) {
     return sum / m.size();
 }
 /**
+     * Method definition (explicit):
      * Calculates the sample standard deviation of the given list of values.
      * @param m list of double values
      * @return sample standard deviation
@@ -79,6 +88,7 @@ public static double stddev(ArrayList<Double> m) {
 }
 
  /**
+     * Method definition (explicit):
      * Computes descriptive statistics for a list of random values.
      * The returned list contains values in the following order:
      * [n, mean, stddev, min, max]
@@ -120,12 +130,13 @@ public ArrayList<Double> statistics(ArrayList<Double> randomValues){
 }
 
  /**
+     * Method definition (explicit):
      * Displays the statistics in a formatted table.
      * @param results list containing [n, mean, stddev, min, max]
      * @param headerOn true to print the table header, false otherwise
 */
 
-void display(ArrayList<Double> results, boolean headerOn){
+public void display(ArrayList<Double> results, boolean headerOn){
     if (headerOn) {
         System.out.printf(
             "%-8s %-10s %-10s %-10s %-10s%n",
@@ -143,10 +154,11 @@ void display(ArrayList<Double> results, boolean headerOn){
     );
 }
  /**
+     * Method definition (explicit):
      * Executes by running all combinations
      * of sample sizes and random number generators.
      */
-void execute(){
+public void execute(){
     int[] n = {10,1000,10000};
 
 boolean headerOn = true;
@@ -161,6 +173,7 @@ boolean headerOn = true;
     }
 }
     /**
+     * Object instantiation (explicit): 
      * Main method (program entry point).
      * Creates a Generator object and starts execution.
      *
