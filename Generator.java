@@ -1,11 +1,32 @@
-
+/*
+Name: Mahbuba Jafarzada
+Course: Object Oriented Analysis and Design
+Project:Assignment 1 - Generator
+Date: 09.02.2026
+*/
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+
+/*
+ * Class definition:
+ * The Generator class is responsible for generating random numbers
+ * using different Java random number generators, computing descriptive
+ * statistics, and displaying the results.
+ */
+
 public class Generator {
 
+// Class attribute (private accessibility)
 private Random random = new Random();
+
+/**
+ * Creates and returns n random doubles in [0,1) using the selected generator.
+ * @param n number of values to generate
+ * @param randNumGen 1=Random, 2=Math.random, 3=ThreadLocalRandom
+ * @return ArrayList of generated values
+ */
 
 public ArrayList<Double> populate(int n, int randNumGen){
  ArrayList<Double> m = new ArrayList<>();
@@ -15,12 +36,12 @@ public ArrayList<Double> populate(int n, int randNumGen){
             m.add(random.nextDouble());
         }
     }
-    if(randNumGen == 2){
+    else if(randNumGen == 2){
         for (int i = 0; i < n; i++) {
             m.add(Math.random());
         }
     }
-    if(randNumGen == 3){
+    else if(randNumGen == 3){
         for (int i = 0; i < n; i++) {
             m.add(ThreadLocalRandom.current().nextDouble());
         }
@@ -28,6 +49,11 @@ public ArrayList<Double> populate(int n, int randNumGen){
     return m;
 }
 
+/**
+     * Calculates the mean (average) of the given list of values.
+     * @param m list of double values
+     * @return mean of the values
+*/
 
 public static double mean(ArrayList<Double> m) {
     double sum = 0.0;
@@ -36,7 +62,11 @@ public static double mean(ArrayList<Double> m) {
     }
     return sum / m.size();
 }
-
+/**
+     * Calculates the sample standard deviation of the given list of values.
+     * @param m list of double values
+     * @return sample standard deviation
+ */
 public static double stddev(ArrayList<Double> m) {
     double avg = mean(m);
     double sum = 0.0;
@@ -48,11 +78,30 @@ public static double stddev(ArrayList<Double> m) {
     return Math.sqrt(sum / (m.size() - 1));
 }
 
+ /**
+     * Computes descriptive statistics for a list of random values.
+     * The returned list contains values in the following order:
+     * [n, mean, stddev, min, max]
+     *
+     * @param randomValues list of generated random values
+     * @return ArrayList<Double> containing statistics
+*/
+    
 public ArrayList<Double> statistics(ArrayList<Double> randomValues){
 
     ArrayList<Double> results = new ArrayList<>();
 
     int n = randomValues.size();
+
+     // Safety check: handle empty list
+    if (n == 0) {
+        results.add(0.0); // n
+        results.add(0.0); // mean
+        results.add(0.0); // stddev
+        results.add(0.0); // min
+        results.add(0.0); // max
+        return results;
+    }
 
     double meanValue = mean(randomValues);
     double stddevValue = (n < 2) ? 0.0 : stddev(randomValues);
@@ -69,6 +118,13 @@ public ArrayList<Double> statistics(ArrayList<Double> randomValues){
 
 
 }
+
+ /**
+     * Displays the statistics in a formatted table.
+     * @param results list containing [n, mean, stddev, min, max]
+     * @param headerOn true to print the table header, false otherwise
+*/
+
 void display(ArrayList<Double> results, boolean headerOn){
     if (headerOn) {
         System.out.printf(
@@ -86,8 +142,12 @@ void display(ArrayList<Double> results, boolean headerOn){
         results.get(4)
     );
 }
+ /**
+     * Executes by running all combinations
+     * of sample sizes and random number generators.
+     */
 void execute(){
-    int[] n = {10,100,150};
+    int[] n = {10,1000,10000};
 
 boolean headerOn = true;
 
@@ -99,9 +159,14 @@ boolean headerOn = true;
             headerOn = false;
         }
     }
-
 }
-
+    /**
+     * Main method (program entry point).
+     * Creates a Generator object and starts execution.
+     *
+     * Object instantiation:
+     * Generator g = new Generator();
+     */
     public static void main(String[] args) {
         Generator g = new Generator();
         g.execute();
