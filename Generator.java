@@ -104,10 +104,6 @@ boolean headerOn = true;
 
     public static void main(String[] args) {
         Generator g = new Generator();
-        // int n = 10;
-        // ArrayList<Double> m = g.populate(n, 1);
-        // ArrayList<Double> t = g.statistics(m);
-        // g.display(t, true);
         g.execute();
 
     }
